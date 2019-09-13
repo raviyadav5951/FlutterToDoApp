@@ -82,14 +82,7 @@ class _TasksScreenState extends State<TasksScreen> {
               ),
             ),
             context: context,
-            builder: (BuildContext buildContext) => AddTaskScreen((newTitle) {
-              // setState(() {
-              //   print(newTitle);
-              //   tasks.add(Task(taskName: newTitle));
-              //   print('tasks length=${tasks.length}');
-              // },
-              // );
-            }),
+            builder: (BuildContext buildContext) => AddTaskScreen(),
           );
         },
       ),
