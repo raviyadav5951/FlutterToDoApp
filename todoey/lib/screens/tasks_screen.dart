@@ -1,25 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:todoey/screens/add_task_screen.dart';
 import 'package:todoey/widgets/task_list.dart';
-import 'package:todoey/models/Task.dart';
+import 'package:todoey/models/TaskData.dart';
 import 'package:provider/provider.dart';
 
 class TasksScreen extends StatefulWidget {
-
-  
   @override
   _TasksScreenState createState() => _TasksScreenState();
 }
 
 class _TasksScreenState extends State<TasksScreen> {
   BuildContext scaffoldContext;
-
-  
-  List<Task> tasks = [
-    Task(taskName: 'Bring Bread', isDone: false),
-    Task(taskName: 'Bring Egg', isDone: false),
-    Task(taskName: 'Bring Butter', isDone: false),
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +45,7 @@ class _TasksScreenState extends State<TasksScreen> {
                       fontWeight: FontWeight.w700),
                 ),
                 Text(
-                  '${tasks.length} Tasks',
+                  '${Provider.of<TaskData>(context).taskCount} Tasks',
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 16.0,
@@ -73,9 +64,7 @@ class _TasksScreenState extends State<TasksScreen> {
                   topRight: Radius.circular(20.0),
                 ),
               ),
-              child: TaskList(
-                tasks: tasks,
-              ),
+              child: TaskList(),
             ),
           ),
         ],
@@ -86,7 +75,6 @@ class _TasksScreenState extends State<TasksScreen> {
         onPressed: () {
           showModalBottomSheet(
             isScrollControlled: true,
-          
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(20.0),
@@ -95,11 +83,12 @@ class _TasksScreenState extends State<TasksScreen> {
             ),
             context: context,
             builder: (BuildContext buildContext) => AddTaskScreen((newTitle) {
-              setState(() {
-                print(newTitle);
-                tasks.add(Task(taskName: newTitle));
-                print('tasks length=${tasks.length}');
-              });
+              // setState(() {
+              //   print(newTitle);
+              //   tasks.add(Task(taskName: newTitle));
+              //   print('tasks length=${tasks.length}');
+              // },
+              // );
             }),
           );
         },
